@@ -1,4 +1,4 @@
-package com.findzach.api.model;
+package com.findzach.api.domain;
 
 import lombok.Data;
 
