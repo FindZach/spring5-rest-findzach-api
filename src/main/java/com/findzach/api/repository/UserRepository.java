@@ -1,6 +1,6 @@
 package com.findzach.api.repository;
 
-import com.findzach.api.model.User;
+import com.findzach.api.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
