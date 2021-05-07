@@ -13,11 +13,11 @@ public interface UserService {
 
     UserDTO getUserById(Long id);
 
-    UserDTO createNewUser(UserDTO customerDTO);
+    UserDTO createNewUser(UserDTO userDTO);
 
-    UserDTO saveUserByDTO(Long id, UserDTO customerDTO);
+    UserDTO saveUserByDTO(Long id, UserDTO userDTO);
 
-    UserDTO patchUser(Long id, UserDTO customerDTO);
+    UserDTO patchUser(Long id, UserDTO userDTO);
 
     void deleteUserById(Long id);
 }

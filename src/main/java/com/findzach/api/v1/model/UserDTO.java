@@ -1,6 +1,7 @@
 package com.findzach.api.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.findzach.api.domain.role.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserDTO {
 
-    private String firstname;
+    private long id;
 
+    /**
+     * TODO: Add more annotations to these - Will have checks on FrontEnd
+     */
+    private String username;
+    private String token;
+    private String email;
+
+    private String firstname;
     private String lastname;
 
-    @JsonProperty("customer_url")
-    private String customerUrl;
+    @JsonProperty("user_url")
+    private String userUrl;
 }

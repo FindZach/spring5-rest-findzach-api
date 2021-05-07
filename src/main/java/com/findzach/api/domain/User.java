@@ -1,11 +1,10 @@
 package com.findzach.api.domain;
 
+import com.findzach.api.domain.role.UserRole;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Zach S <zach@findzach.com>
@@ -19,8 +18,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /**
+     * TODO: Add more annotations to these - Will have checks on FrontEnd
+     */
+    private String username;
+    private String password;
+    private String email;
+
+    private String token;
+
     private String firstname;
     private String lastname;
 
-    private String role;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<Tutorial> tutorials;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.UNVERIFIED;
 }
