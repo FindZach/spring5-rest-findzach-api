@@ -5,6 +5,7 @@ import com.findzach.api.domain.User;
 import com.findzach.api.repository.TutorialRepository;
 import com.findzach.api.repository.UserRepository;
 import com.findzach.api.service.impl.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @author Zach S <zach@findzach.com>
  * @since 5/7/2021
  */
+@Slf4j
 @Component
 public class Bootstrap implements CommandLineRunner {
 
@@ -36,7 +38,7 @@ public class Bootstrap implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Calling bootstrap!");
+        log.info("Starting Bootstrap");
 
         User zach = new User();
         zach.setId(1L);
@@ -46,8 +48,6 @@ public class Bootstrap implements CommandLineRunner {
         zach.setUsername("Zach");
         zach.setToken("findzach");
         userRepository.save(zach);
-
-        System.out.println("Successfully saved Zach to the User Repository");
 
         Tutorial newTutorial = new Tutorial();
 
@@ -62,6 +62,6 @@ public class Bootstrap implements CommandLineRunner {
         newTutorial.setCreationDate(formatter.format(new Date()));
         tutorialRepository.save(newTutorial);
 
-        System.out.println("Successfully saved our first Tutorial to the Tutorial Repository");
+        log.info("Bootstrap initialized");
     }
 }
