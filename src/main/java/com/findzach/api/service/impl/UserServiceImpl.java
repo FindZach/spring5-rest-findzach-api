@@ -1,8 +1,8 @@
 package com.findzach.api.service.impl;
 
 import com.findzach.api.controller.v1.UserController;
-import com.findzach.api.domain.User;
-import com.findzach.api.repository.UserRepository;
+import com.findzach.api.domain.UserLegacy;
+import com.findzach.api.repository.UserLegacyRepository;
 import com.findzach.api.service.UserService;
 import com.findzach.api.v1.mapper.UserMapper;
 import com.findzach.api.v1.model.UserDTO;
@@ -21,18 +21,18 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
-    private final UserRepository userRepository;
+    private final UserLegacyRepository userLegacyRepository;
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+    public UserServiceImpl(UserMapper userMapper, UserLegacyRepository userLegacyRepository) {
         this.userMapper = userMapper;
-        this.userRepository = userRepository;
+        this.userLegacyRepository = userLegacyRepository;
     }
 
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll()
+        return userLegacyRepository.findAll()
                 .stream()
                 .map(user -> {
                     UserDTO userDTO = userMapper.userToUserDTO(user);
@@ -72,57 +72,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public <S extends User> S save(S s) {
-        return userRepository.save(s);
+    public <S extends UserLegacy> S save(S s) {
+        return userLegacyRepository.save(s);
     }
 
     @Override
-    public <S extends User> Iterable<S> saveAll(Iterable<S> iterable) {
-        return userRepository.saveAll(iterable);
+    public <S extends UserLegacy> Iterable<S> saveAll(Iterable<S> iterable) {
+        return userLegacyRepository.saveAll(iterable);
     }
 
     @Override
-    public Optional<User> findById(Long aLong) {
-        return userRepository.findById(aLong);
+    public Optional<UserLegacy> findById(Long aLong) {
+        return userLegacyRepository.findById(aLong);
     }
 
     @Override
     public boolean existsById(Long aLong) {
-        return userRepository.existsById(aLong);
+        return userLegacyRepository.existsById(aLong);
     }
 
     @Override
-    public Iterable<User> findAll() {
-        return userRepository.findAll();
+    public Iterable<UserLegacy> findAll() {
+        return userLegacyRepository.findAll();
     }
 
     @Override
-    public Iterable<User> findAllById(Iterable<Long> iterable) {
-        return userRepository.findAllById(iterable);
+    public Iterable<UserLegacy> findAllById(Iterable<Long> iterable) {
+        return userLegacyRepository.findAllById(iterable);
     }
 
     @Override
     public long count() {
-        return userRepository.count();
+        return userLegacyRepository.count();
     }
 
     @Override
     public void deleteById(Long aLong) {
-        userRepository.deleteById(aLong);
+        userLegacyRepository.deleteById(aLong);
     }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void delete(UserLegacy userLegacy) {
+        userLegacyRepository.delete(userLegacy);
     }
 
     @Override
-    public void deleteAll(Iterable<? extends User> iterable) {
-        userRepository.deleteAll(iterable);
+    public void deleteAll(Iterable<? extends UserLegacy> iterable) {
+        userLegacyRepository.deleteAll(iterable);
     }
 
     @Override
     public void deleteAll() {
-        userRepository.deleteAll();
+        userLegacyRepository.deleteAll();
     }
 }

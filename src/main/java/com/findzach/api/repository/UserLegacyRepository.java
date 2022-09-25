@@ -1,6 +1,6 @@
 package com.findzach.api.repository;
 
-import com.findzach.api.domain.User;
+import com.findzach.api.domain.UserLegacy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @since 5/7/2021
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserLegacyRepository extends JpaRepository<UserLegacy, Long> {
 }

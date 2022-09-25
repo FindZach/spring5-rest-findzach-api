@@ -2,7 +2,6 @@ package com.findzach.api.domain;
 
 import com.findzach.api.domain.role.UserRole;
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Data
-public class User {
+public class UserLegacy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +30,7 @@ public class User {
     private String firstname;
     private String lastname;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "userLegacy", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<Tutorial> tutorials;
 

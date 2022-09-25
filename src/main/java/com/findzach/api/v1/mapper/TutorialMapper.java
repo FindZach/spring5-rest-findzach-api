@@ -1,8 +1,6 @@
 package com.findzach.api.v1.mapper;
 
 import com.findzach.api.domain.Tutorial;
-import com.findzach.api.domain.User;
-import com.findzach.api.v1.model.UserDTO;
 import com.findzach.api.v1.model.tutorial.TutorialDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
