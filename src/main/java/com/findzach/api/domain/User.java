@@ -2,6 +2,7 @@ package com.findzach.api.domain;
 
 import com.findzach.api.domain.role.UserRole;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.Set;

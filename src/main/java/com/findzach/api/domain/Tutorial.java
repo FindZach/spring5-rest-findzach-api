@@ -1,8 +1,11 @@
 package com.findzach.api.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author Zach S <zach@findzach.com>
@@ -18,10 +21,14 @@ public class Tutorial {
     private Long id;
 
     private String title;
+    private String slug;
     private String description;
-    private String tutorialContent;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column(length = 100000)
+    private String content;
+    private String creationDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 }

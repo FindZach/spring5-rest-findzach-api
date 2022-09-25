@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 /**
  * @author Zach S <zach@findzach.com>
  * @since 5/7/2021
@@ -49,8 +53,13 @@ public class Bootstrap implements CommandLineRunner {
 
         newTutorial.setTitle("How to link hibernate to MySQL");
         newTutorial.setDescription("We have a description here");
-        newTutorial.setTutorialContent("YEEEEE");
+        newTutorial.setContent("<h2>Hello World!</h2>");
+        newTutorial.setSlug("link-hibernate-mysql-2022");
         newTutorial.setUser(zach);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+        newTutorial.setCreationDate(formatter.format(new Date()));
         tutorialRepository.save(newTutorial);
 
         System.out.println("Successfully saved our first Tutorial to the Tutorial Repository");
