@@ -24,6 +24,11 @@ public class Tutorial {
     @Column(length = 100000)
     private String content;
     private String creationDate;
+    private String tags;
+
+    @Column(length = 250000)
+    private String thumbnailImageUrl;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

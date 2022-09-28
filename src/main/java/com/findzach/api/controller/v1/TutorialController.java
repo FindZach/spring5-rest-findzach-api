@@ -2,6 +2,7 @@ package com.findzach.api.controller.v1;
 
 import com.findzach.api.domain.Tutorial;
 import com.findzach.api.service.TutorialService;
+import com.findzach.api.v1.mapper.TutorialMapper;
 import com.findzach.api.v1.model.tutorial.TutorialDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ import java.util.Optional;
 public class TutorialController {
 
     private TutorialService tutorialService;
+    private TutorialMapper tutorialMapper;
 
     @Autowired
-    public TutorialController(TutorialService tutorialService) {
+    public TutorialController(TutorialService tutorialService, TutorialMapper tutorialMapper) {
         this.tutorialService = tutorialService;
     }
 
@@ -83,6 +85,7 @@ public class TutorialController {
             log.info("Unable to find tutorial by the slug");
         }
 
+
         TutorialDTO newTut = new TutorialDTO();
         newTut.setSlug(slug);
         newTut.setTitle(possibleTutorial.get().getTitle());
@@ -90,6 +93,8 @@ public class TutorialController {
         newTut.setContent(possibleTutorial.get().getContent());
         //newTut.setUse(String.valueOf(possibleTutorial.get().getUser().getId()));
         newTut.setCreationDate(possibleTutorial.get().getCreationDate());
+        newTut.setTags(possibleTutorial.get().getTags());
+        newTut.setThumbnailImageUrl(possibleTutorial.get().getThumbnailImageUrl());
 
         return ResponseEntity.ok().body(newTut);
     }

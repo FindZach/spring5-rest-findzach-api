@@ -160,6 +160,8 @@ public class TutorialServiceImpl implements TutorialService {
             updatedTutorial.setTitle(tutorialDTO.getTitle());
             updatedTutorial.setContent(tutorialDTO.getContent());
             updatedTutorial.setDescription(tutorialDTO.getDescription());
+            updatedTutorial.setTags(tutorialDTO.getTags());
+            updatedTutorial.setThumbnailImageUrl(tutorialDTO.getThumbnailImageUrl());
 
             tutorialRepository.save(updatedTutorial);
 

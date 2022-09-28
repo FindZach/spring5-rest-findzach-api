@@ -17,7 +17,6 @@ import java.util.Date;
  * @since 5/7/2021
  */
 @Slf4j
-@Component
 public class Bootstrap implements CommandLineRunner {
 
     private final UserLegacyRepository userLegacyRepository;

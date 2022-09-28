@@ -24,4 +24,8 @@ public class TutorialDTO {
 
     private String username;
     private String creationDate;
+
+    private String tags;
+    private String thumbnailImageUrl;
+
 }

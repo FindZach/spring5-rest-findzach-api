@@ -21,7 +21,6 @@ import java.util.Set;
  * Auth Boostrap Data
  */
 @Slf4j
-@Component
 public class AuthBootstrap implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
@@ -70,9 +69,9 @@ public class AuthBootstrap implements CommandLineRunner {
         noah.setPassword(encoder.encode("passwords"));
         shea.setPassword(encoder.encode("passwords"));
 
-        zach.setRoles(Set.of(adminRole));
-        noah.setRoles(Set.of(modRole));
-        shea.setRoles(Set.of(userRole));
+        zach.setRoles(Set.of(adminRole, userRole));
+        noah.setRoles(Set.of(modRole, userRole));
+        shea.setRoles(Set.of(userRole, modRole));
 
         userRepository.save(zach);
         userRepository.save(noah);
