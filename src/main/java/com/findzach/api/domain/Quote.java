@@ -1,10 +1,9 @@
 package com.findzach.api.domain;
 
 import com.findzach.api.domain.addon.Metadata;
+import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +11,9 @@ import java.util.List;
  * @author Zach S <zach@findzach.com>
  * @since 10/2/2022
  */
+@Entity
+@Table(name = "quotes")
+@Data
 public class Quote implements Metadata {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
