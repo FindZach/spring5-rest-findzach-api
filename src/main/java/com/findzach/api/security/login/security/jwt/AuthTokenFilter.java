@@ -35,6 +35,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
+            logger.info("Request Received " + jwt);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
@@ -46,6 +47,12 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                                 userDetails.getAuthorities());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+               // response.addHeader("Access-Control-Allow-Origin:", "*");
+
+                request.getHeaderNames().asIterator().forEachRemaining(s -> {
+                    logger.info("Approved Request Header: " + s);
+                    logger.info("Approved Header Value:  "+ s +" : " + request.getHeader(s));
+                });
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

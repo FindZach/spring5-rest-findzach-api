@@ -19,6 +19,7 @@ import com.findzach.api.security.login.repository.RoleRepository;
 import com.findzach.api.security.login.repository.UserRepository;
 import com.findzach.api.security.login.security.jwt.JwtUtils;
 import com.findzach.api.security.services.UserDetailsImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -28,18 +29,19 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Zach S <zach@findzach.com>
  * @since 9/25/2022
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true", allowedHeaders = "*",
+        methods= {RequestMethod.GET,RequestMethod.POST,
+                RequestMethod.DELETE, RequestMethod.PUT,
+                RequestMethod.PATCH, RequestMethod.OPTIONS,
+                RequestMethod.HEAD, RequestMethod.TRACE})
 @RestController
+@Slf4j
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
@@ -59,6 +61,8 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+        log.info("Request called to sign in!");
 
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

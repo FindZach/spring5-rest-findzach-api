@@ -1,10 +1,12 @@
 package com.findzach.api.security.login.security.jwt;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +31,16 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+
+        logger.info("User Agent: "+request.getHeader("user-agent"));
+
+
+        request.getHeaderNames().asIterator().forEachRemaining(s -> {
+            logger.info("UnAuth Request Header: " + s);
+            logger.info("UnAuth Header Value:  "+ s +" : " + request.getHeader(s));
+        });
+        response.getHeaderNames().stream().forEach(s -> logger.info("Response Header: " + s));
 
         final Map<String, Object> body = new HashMap<>();
         body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
