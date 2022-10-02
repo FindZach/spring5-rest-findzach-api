@@ -14,7 +14,7 @@ public interface DTOService<DTO, POJO> {
 
     List<DTO> getAll();
 
-    DTO transferToTutorial(POJO pojo);
+    DTO transferToDTO(POJO pojo);
     DTO getPojoById(Long id);
 
     DTO create(DTO dto);
