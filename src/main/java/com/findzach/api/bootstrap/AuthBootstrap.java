@@ -41,6 +41,7 @@ public class AuthBootstrap implements CommandLineRunner {
 
         log.info("Loading Authentication Bootstrap.");
 
+        /**
         Role userRole = new Role();
         Role modRole = new Role();
         Role adminRole = new Role();
@@ -49,9 +50,9 @@ public class AuthBootstrap implements CommandLineRunner {
         modRole.setName(ERole.ROLE_MODERATOR);
         adminRole.setName(ERole.ROLE_ADMIN);
 
-        roleRepository.save(userRole);
-        roleRepository.save(modRole);
-        roleRepository.save(adminRole);
+        //roleRepository.save(userRole);
+        //roleRepository.save(modRole);
+        //roleRepository.save(adminRole);
 
         User zach = new User();
         User noah = new User();
@@ -78,6 +79,7 @@ public class AuthBootstrap implements CommandLineRunner {
         userRepository.save(shea);
 
         log.info("Loaded Authentication Bootstrap.");
+         **/
 
 
     }

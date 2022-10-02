@@ -1,9 +1,6 @@
 package com.findzach.api.bootstrap;
 
-import com.findzach.api.domain.Tutorial;
-import com.findzach.api.domain.UserLegacy;
 import com.findzach.api.repository.TutorialRepository;
-import com.findzach.api.repository.UserLegacyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,12 +16,10 @@ import java.util.Date;
 @Slf4j
 public class Bootstrap implements CommandLineRunner {
 
-    private final UserLegacyRepository userLegacyRepository;
     private final TutorialRepository tutorialRepository;
 
     @Autowired
-    public Bootstrap(UserLegacyRepository userLegacyRepository, TutorialRepository tutorialRepository) {
-        this.userLegacyRepository = userLegacyRepository;
+    public Bootstrap(TutorialRepository tutorialRepository) {
         this.tutorialRepository = tutorialRepository;
     }
 
@@ -37,6 +32,7 @@ public class Bootstrap implements CommandLineRunner {
     public void run(String... args) throws Exception {
         log.info("Starting Bootstrap");
 
+        /**
         UserLegacy zach = new UserLegacy();
         zach.setId(1L);
         zach.setFirstname("Zachary");
@@ -59,6 +55,6 @@ public class Bootstrap implements CommandLineRunner {
         newTutorial.setCreationDate(formatter.format(new Date()));
         tutorialRepository.save(newTutorial);
 
-        log.info("Bootstrap initialized");
+        log.info("Bootstrap initialized");**/
     }
 }
