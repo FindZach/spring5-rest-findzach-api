@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
-    @RequestMapping("/")
+    @RequestMapping("/api/home")
     public String home() {
         return "Welcome to FindZach's Backend REST API";
     }

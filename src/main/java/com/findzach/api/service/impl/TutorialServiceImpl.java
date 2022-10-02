@@ -3,7 +3,6 @@ package com.findzach.api.service.impl;
 import com.findzach.api.domain.Tutorial;
 import com.findzach.api.repository.TutorialRepository;
 import com.findzach.api.service.TutorialService;
-import com.findzach.api.service.UserService;
 import com.findzach.api.v1.mapper.TutorialMapper;
 import com.findzach.api.v1.model.tutorial.TutorialDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -25,14 +24,13 @@ import java.util.stream.Collectors;
 public class TutorialServiceImpl implements TutorialService {
 
     private TutorialRepository tutorialRepository;
-    private UserService userService;
+
     private TutorialMapper tutorialMapper;
 
     @Autowired
-    public TutorialServiceImpl(TutorialRepository tutorialRepository, TutorialMapper tutorialMapper, UserService userService) {
+    public TutorialServiceImpl(TutorialRepository tutorialRepository, TutorialMapper tutorialMapper) {
         this.tutorialRepository = tutorialRepository;
         this.tutorialMapper = tutorialMapper;
-        this.userService = userService;
     }
 
     @Override
@@ -96,7 +94,7 @@ public class TutorialServiceImpl implements TutorialService {
     }
 
     @Override
-    public List<TutorialDTO> getAllTutorials() {
+    public List<TutorialDTO> getAll() {
         return tutorialRepository.findAll()
                 .stream()
                 .map(tutorial -> {
@@ -117,12 +115,12 @@ public class TutorialServiceImpl implements TutorialService {
     }
 
     @Override
-    public TutorialDTO getTutorialById(Long id) {
+    public TutorialDTO getPojoById(Long id) {
         return null;
     }
 
     @Override
-    public TutorialDTO createTutorial(TutorialDTO tutorialDTO) {
+    public TutorialDTO create(TutorialDTO tutorialDTO) {
 
         log.info("Tutorial Content: " + tutorialDTO.getContent());
 
@@ -141,14 +139,14 @@ public class TutorialServiceImpl implements TutorialService {
     }
 
     @Override
-    public TutorialDTO saveTutorialByDTO(Long id, TutorialDTO tutorialDTO) {
+    public TutorialDTO save(Long id, TutorialDTO tutorialDTO) {
         Tutorial updatedTutorial = tutorialMapper.tutorialDtoToTutorial(tutorialDTO);
         TutorialDTO tutorialDTOUpdated = tutorialMapper.tutorialToTutorialDTO(tutorialRepository.save(updatedTutorial));
         return tutorialDTOUpdated;
     }
 
     @Override
-    public TutorialDTO patchTutorial(Long id, TutorialDTO tutorialDTO) {
+    public TutorialDTO update(Long id, TutorialDTO tutorialDTO) {
 
         Optional<Tutorial> tutorialOptional = tutorialRepository.findById(id);
 

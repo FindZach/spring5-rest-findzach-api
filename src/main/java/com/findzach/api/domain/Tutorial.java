@@ -28,9 +28,4 @@ public class Tutorial {
 
     @Column(length = 250000)
     private String thumbnailImageUrl;
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserLegacy userLegacy;
 }
