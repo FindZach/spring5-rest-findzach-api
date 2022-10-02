@@ -98,7 +98,7 @@ public class TutorialServiceImpl implements TutorialService {
         return tutorialRepository.findAll()
                 .stream()
                 .map(tutorial -> {
-                    TutorialDTO tutorialDTO = tutorialMapper.tutorialToTutorialDTO(tutorial);
+                    TutorialDTO tutorialDTO = tutorialMapper.pojoToDTO(tutorial);
                     return tutorialDTO;
                 })
                 .collect(Collectors.toList());
@@ -110,8 +110,8 @@ public class TutorialServiceImpl implements TutorialService {
      * @return - {@link TutorialDTO}
      */
     @Override
-    public TutorialDTO transferToTutorial(Tutorial tutorial) {
-        return tutorialMapper.tutorialToTutorialDTO(tutorial);
+    public TutorialDTO transferToDTO(Tutorial tutorial) {
+        return tutorialMapper.pojoToDTO(tutorial);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class TutorialServiceImpl implements TutorialService {
 
         log.info("Tutorial Content: " + tutorialDTO.getContent());
 
-        Tutorial tutorial = tutorialMapper.tutorialDtoToTutorial(tutorialDTO);
+        Tutorial tutorial = tutorialMapper.DTOtoPojo(tutorialDTO);
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -133,15 +133,15 @@ public class TutorialServiceImpl implements TutorialService {
 
         tutorialRepository.save(tutorial);
 
-        TutorialDTO updatedDTO = tutorialMapper.tutorialToTutorialDTO(tutorial);
+        TutorialDTO updatedDTO = tutorialMapper.pojoToDTO(tutorial);
 
         return updatedDTO;
     }
 
     @Override
     public TutorialDTO save(Long id, TutorialDTO tutorialDTO) {
-        Tutorial updatedTutorial = tutorialMapper.tutorialDtoToTutorial(tutorialDTO);
-        TutorialDTO tutorialDTOUpdated = tutorialMapper.tutorialToTutorialDTO(tutorialRepository.save(updatedTutorial));
+        Tutorial updatedTutorial = tutorialMapper.DTOtoPojo(tutorialDTO);
+        TutorialDTO tutorialDTOUpdated = tutorialMapper.pojoToDTO(tutorialRepository.save(updatedTutorial));
         return tutorialDTOUpdated;
     }
 
@@ -163,7 +163,7 @@ public class TutorialServiceImpl implements TutorialService {
 
             tutorialRepository.save(updatedTutorial);
 
-            TutorialDTO updatedTutorialDTO = tutorialMapper.tutorialToTutorialDTO(updatedTutorial);
+            TutorialDTO updatedTutorialDTO = tutorialMapper.pojoToDTO(updatedTutorial);
 
             return updatedTutorialDTO;
         } else {
