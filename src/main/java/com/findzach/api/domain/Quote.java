@@ -19,8 +19,8 @@ public class Quote implements Metadata {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String title;
-    private String date;
+    private String quote;
+    private String author;
 
     private String[] tags;
     private String metadataContent;

@@ -1,12 +1,19 @@
 package com.findzach.api.service.impl;
 
 import com.findzach.api.domain.Quote;
+import com.findzach.api.repository.QuoteRepository;
 import com.findzach.api.service.QuoteService;
+import com.findzach.api.v1.mapper.QuoteMapper;
+import com.findzach.api.v1.mapper.TutorialMapper;
 import com.findzach.api.v1.model.quote.QuoteDTO;
+import com.findzach.api.v1.model.tutorial.TutorialDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author Zach S <zach@findzach.com>
@@ -15,24 +22,45 @@ import java.util.Optional;
 @Service
 public class QuoteServiceImpl implements QuoteService {
 
+    private QuoteRepository quoteRepository;
+
+    private QuoteMapper quoteMapper;
+
+    @Autowired
+    public QuoteServiceImpl(QuoteRepository quoteRepository, QuoteMapper quoteMapper) {
+        this.quoteRepository = quoteRepository;
+        this.quoteMapper = quoteMapper;
+    }
+
     @Override
     public List<QuoteDTO> getAll() {
-        return null;
+        return quoteRepository.findAll()
+                .stream()
+                .map(quote -> {
+                    QuoteDTO quoteDTO = quoteMapper.pojoToDTO(quote);
+                    return quoteDTO;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public QuoteDTO transferToDTO(Quote quote) {
-        return null;
+        return quoteMapper.pojoToDTO(quote);
     }
 
     @Override
     public QuoteDTO getPojoById(Long id) {
-        return null;
+        //TODO: Should add null check - We will assume its a valid ID being passed for now...
+        return quoteMapper.pojoToDTO(quoteRepository.findById(id).get());
     }
 
     @Override
     public QuoteDTO create(QuoteDTO quoteDTO) {
-        return null;
+        Quote newQuote = quoteMapper.DTOtoPojo(quoteDTO);
+
+        System.out.println("Saving new Quote " + newQuote.getQuote());
+
+        return quoteMapper.pojoToDTO(quoteRepository.save(newQuote));
     }
 
     @Override
@@ -46,13 +74,18 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public Quote getRandomQuote() {
-        return null;
+    public QuoteDTO getRandomQuote() {
+        Random randomizer = new Random();
+
+        List<QuoteDTO> quoteList = getAll();
+
+        return quoteList
+                .get(randomizer.nextInt(quoteList.size()));
     }
 
     @Override
     public <S extends Quote> S save(S s) {
-        return null;
+        return quoteRepository.save(s);
     }
 
     @Override

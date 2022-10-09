@@ -14,5 +14,5 @@ public interface QuoteService extends CrudRepository<Quote, Long>, DTOService<Qu
      * Grabs a random quote from the list
      * @return A {@link Quote}
      */
-    Quote getRandomQuote();
+    QuoteDTO getRandomQuote();
 }

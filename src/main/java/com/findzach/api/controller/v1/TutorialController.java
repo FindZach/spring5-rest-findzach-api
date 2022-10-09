@@ -110,7 +110,6 @@ public class TutorialController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TutorialDTO> submitTutorial(@RequestBody TutorialDTO tutorialDTO) {
 
-
         if (tutorialService.getTutorialBySlug(tutorialDTO.getSlug()) == null) {
             log.info("Tutorial Submitted: " + tutorialDTO.getTitle());
             return ResponseEntity.ok(tutorialService.create(tutorialDTO));
